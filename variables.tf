@@ -57,7 +57,7 @@ variable "azure_sql_min_tls_version" {
 variable "enable_private_endpoint" {
   description = "Enables SQL resource with private endpoint."
   type        = bool
-  default     = true
+  default     = false
 }
 variable "azure_tags" {
   description = "Set Azure default tags for all resources created by Terraform Azure Sql module."

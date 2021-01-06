@@ -58,13 +58,13 @@ resource "azurerm_mssql_server_extended_auditing_policy" "mssqlaudit" {
 # Create Azure Private Endpoint with Private Connection to MySQL resource.
 resource "azurerm_private_endpoint" "pep" {
   count               = var.enable_private_endpoint == true ? 1 : 0
-  name                = format("%s-endpoint", random_string.random.result)
+  name                = format("%s-pep", random_string.random.result)
   location            = coalesce(var.azure_location, data.azurerm_resource_group.rg.location)
   resource_group_name = data.azurerm_resource_group.rg.name
   subnet_id           = data.azurerm_subnet.subnet.id
 
   private_service_connection {
-    name                           = format("%s-privateserviceconnection", random_string.random.result)
+    name                           = format("%s-psc", random_string.random.result)
     private_connection_resource_id = azurerm_mssql_server.mssql.id
     subresource_names              = ["sqlServer"]
     is_manual_connection           = false
